@@ -17,12 +17,12 @@ module Libv8
       end
 
       def version
-        call('-v')[0..1].join =~ VERSION_REGEXP
+        call('-v') =~ VERSION_REGEXP
         $1
       end
 
       def target
-        call('-v')[0..1].join =~ TARGET_REGEXP
+        call('-v') =~ TARGET_REGEXP
         $1
       end
 
@@ -31,7 +31,7 @@ module Libv8
       end
 
       def call(*arguments)
-        Open3.capture3 arguments.unshift('LC_ALL=en', @path).join(' ')
+        `#{arguments.unshift('LC_ALL=en', @path).join(' ')}`
       end
     end
   end
